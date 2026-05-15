@@ -2,14 +2,28 @@ import { useEffect, useRef } from 'react';
 import Icon from '@/components/ui/icon';
 
 const PORTAL_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/d7c4a660-af38-4203-af90-3f31537fe7f5.jpg';
-const ELLA_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/a21088e1-b2b7-4555-85d2-016202ccd613.jpg';
-const ELENA_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/01139200-82ed-4d0e-9441-74cf8d72e1bf.jpg';
-const MAXIM_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/d3bec280-b096-48f3-a025-fe5d76d97a6e.jpg';
+// Реальные фото экспертов
+const ELLA_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/21b7d71f-423e-436d-aa1f-342b0ab4b499.png';
+const ELENA_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/20e007c1-11b9-4500-92f9-09c3bac1257c.png';
+const MAXIM_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/a4dfc592-f4e7-4f90-b864-4c668e3622d9.jpg';
 
 const TG_ELLA = 'https://t.me/voroshilinaella';
 const TG_ELENA = 'https://t.me/Elena_proresurs';
 const TG_MAXIM = 'https://t.me/Alladium';
 const TG_REGISTER = 'https://t.me/voroshilinaella';
+
+const reviews = [
+  {
+    author: 'Татьяна',
+    text: 'Я пришла на Портал с запросом на изменение всех сфер своей жизни. До практикума у меня были серьёзные проблемы в сфере финансов, постоянные эмоциональные качели, ощущение пустоты и замкнутого круга. Понимание, что ты больше не сможешь жить по прошлому сценарию — реальность поменялась, я изменилась, прежней меня больше нет.',
+    highlight: 'Таких мощных энергий, ощущений я не испытывала ранее. Каждый день особенный и не похож на предыдущий.',
+  },
+  {
+    author: 'Наталья А.',
+    text: 'Очень хочу поделиться своими чувствами после практики с Эллой. Элла — ты такая мягкая, чуткая, невероятно приятно было с тобой работать. Уходила с практики с улыбкой и отличным настроением, мне хотелось петь и танцевать.',
+    highlight: 'Было ощущение, что мы знакомы сто лет. Это было волшебно ✨',
+  },
+];
 
 function Particles() {
   const particles = Array.from({ length: 20 }, (_, i) => ({
@@ -178,11 +192,12 @@ export default function Index() {
             </span>
           </div>
 
-          <div className="text-7xl md:text-8xl mb-4 animate-float">🔮</div>
+          <div className="text-7xl md:text-8xl mb-6 animate-float">🔮</div>
 
-          <h1 className="font-cormorant text-5xl md:text-7xl lg:text-8xl font-light leading-tight mb-6">
-            <span className="gradient-gold">ПОРТАЛ</span>
-            <span className="text-white"> 3</span>
+          {/* Заголовок ПОРТАЛ 3 в одну строку, выровнен по центру */}
+          <h1 className="font-cormorant font-light leading-none mb-6 flex items-baseline justify-center gap-4">
+            <span className="gradient-gold" style={{ fontSize: 'clamp(3.5rem, 12vw, 8rem)' }}>ПОРТАЛ</span>
+            <span className="text-white" style={{ fontSize: 'clamp(3.5rem, 12vw, 8rem)' }}>3</span>
           </h1>
 
           <p className="font-cormorant text-xl md:text-2xl text-white/60 italic mb-4 tracking-wide">
@@ -313,17 +328,17 @@ export default function Index() {
               },
               {
                 icon: '🔮', title: 'Изменения', items: [
-                  'Прошлое перестало так сильно влиять',
+                  'Прошлое перестанет так сильно влиять',
                   'Легче принимать решения',
                   'Ощущение движения вперёд',
-                  'Жизнь начала складываться иначе',
+                  'Жизнь начнёт складываться иначе',
                 ]
               },
             ].map((col, i) => (
-              <div key={i} className="card-mystic rounded-2xl p-6 text-center">
+              <div key={i} className="card-mystic rounded-2xl p-6 text-center flex flex-col">
                 <div className="text-4xl mb-4">{col.icon}</div>
                 <h3 className="font-cormorant text-2xl gradient-gold mb-4">{col.title}</h3>
-                <ul className="space-y-2">
+                <ul className="space-y-2 flex-1">
                   {col.items.map((item, j) => (
                     <li key={j} className="font-montserrat text-white/60 text-sm flex items-start gap-2 text-left">
                       <span className="text-gold mt-0.5 flex-shrink-0">—</span>
@@ -365,14 +380,15 @@ export default function Index() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <div className="card-mystic rounded-2xl p-8 mb-6">
+          {/* Равные по высоте рамки */}
+          <div className="grid md:grid-cols-2 gap-8 items-stretch">
+            <div className="flex flex-col gap-6">
+              <div className="card-mystic rounded-2xl p-8 flex-1 flex flex-col">
                 <h3 className="font-cormorant text-2xl text-gold mb-4">Формат</h3>
-                <p className="font-montserrat text-white/70 text-sm leading-relaxed mb-4">
+                <p className="font-montserrat text-white/70 text-sm leading-relaxed mb-5">
                   Глубокий трансформационный онлайн-практикум с сопровождением.
                 </p>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-3 flex-1">
                   {['Живые эфиры', 'Практики', 'Энерговибрационные сеансы', 'Разборы состояний', 'Сопровождение', 'Доступ к записям'].map((item, i) => (
                     <div key={i} className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
@@ -398,7 +414,8 @@ export default function Index() {
               </div>
             </div>
 
-            <div className="card-mystic rounded-2xl p-8 border-gold/20">
+            {/* Правая карточка — та же высота что левый столбец */}
+            <div className="card-mystic rounded-2xl p-8 flex flex-col justify-between" style={{ border: '1px solid rgba(212,175,106,0.2)' }}>
               <div className="text-center mb-6">
                 <div className="text-5xl animate-float">🌀</div>
               </div>
@@ -408,7 +425,7 @@ export default function Index() {
               <p className="font-montserrat text-white/60 text-sm leading-relaxed text-center">
                 ПОРТАЛ 3 — это пространство совместной глубокой работы, где участники проходят внутренний переход вместе с авторами и полем практикума.
               </p>
-              <div className="mt-6 pt-6" style={{ borderTop: '1px solid rgba(212,175,106,0.1)' }}>
+              <div className="mt-6 pt-6 flex-1 flex flex-col justify-end" style={{ borderTop: '1px solid rgba(212,175,106,0.1)' }}>
                 <p className="font-montserrat text-center text-white/40 text-xs uppercase tracking-widest">
                   Работа строится так, чтобы человек не просто получил информацию, а прожил внутренние изменения
                 </p>
@@ -473,7 +490,6 @@ export default function Index() {
               </div>
             ))}
 
-            {/* Bonus module */}
             <div className="card-mystic rounded-2xl p-8" style={{ border: '1px solid rgba(212,175,106,0.3)', boxShadow: '0 0 30px rgba(212,175,106,0.15)' }}>
               <div className="flex items-start gap-4 mb-4">
                 <span className="text-3xl flex-shrink-0">✨</span>
@@ -533,23 +549,23 @@ export default function Index() {
               <div
                 key={i}
                 className="card-mystic rounded-2xl p-6 flex flex-col items-center text-center hover:border-gold/40 transition-all duration-300"
-                style={i === 0 ? { border: '1px solid rgba(212,175,106,0.3)' } : {}}
+                style={i === 0 ? { border: '1px solid rgba(212,175,106,0.35)' } : {}}
               >
-                {/* Avatar circle */}
+                {/* Круглое фото */}
                 <div
                   className="w-28 h-28 rounded-full mb-5 overflow-hidden flex-shrink-0"
-                  style={{ border: '2px solid rgba(212,175,106,0.4)', boxShadow: '0 0 20px rgba(212,175,106,0.15)' }}
+                  style={{ border: '2px solid rgba(212,175,106,0.45)', boxShadow: '0 0 24px rgba(212,175,106,0.18)' }}
                 >
                   <img
                     src={expert.img}
                     alt={expert.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-top"
                   />
                 </div>
 
                 <h3 className="font-cormorant text-xl text-gold mb-1">{expert.name}</h3>
                 <p className="font-montserrat text-white/40 text-xs mb-3 leading-relaxed">{expert.role}</p>
-                <p className="font-montserrat text-white/60 text-sm leading-relaxed flex-1">{expert.description}</p>
+                <p className="font-montserrat text-white/65 text-sm leading-relaxed flex-1">{expert.description}</p>
 
                 <a
                   href={expert.tg}
@@ -560,6 +576,57 @@ export default function Index() {
                   <Icon name="Send" size={12} />
                   Написать в Telegram
                 </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      <div className="section-divider mx-auto max-w-4xl" />
+
+      {/* REVIEWS */}
+      <Section className="py-24 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <p className="text-xs font-montserrat tracking-[0.3em] uppercase text-gold/50 mb-4">Отзывы участников</p>
+            <h2 className="font-cormorant text-4xl md:text-6xl text-white font-light">
+              Что говорят <span className="gradient-gold">участники</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {reviews.map((review, i) => (
+              <div
+                key={i}
+                className="card-mystic rounded-2xl p-8 flex flex-col"
+                style={{ border: '1px solid rgba(212,175,106,0.15)' }}
+              >
+                <div className="flex items-center gap-3 mb-5">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'linear-gradient(135deg, rgba(212,175,106,0.3), rgba(124,58,237,0.3))', border: '1px solid rgba(212,175,106,0.3)' }}
+                  >
+                    <span className="font-cormorant text-gold text-lg">{review.author[0]}</span>
+                  </div>
+                  <div>
+                    <p className="font-montserrat text-gold text-sm font-semibold">{review.author}</p>
+                    <p className="font-montserrat text-white/30 text-xs">Участник практикума</p>
+                  </div>
+                  <div className="ml-auto text-gold/40 text-3xl font-cormorant leading-none">"</div>
+                </div>
+
+                <p className="font-montserrat text-white/60 text-sm leading-relaxed mb-4 flex-1">
+                  {review.text}
+                </p>
+
+                <div
+                  className="rounded-xl p-4 mt-auto"
+                  style={{ background: 'linear-gradient(135deg, rgba(212,175,106,0.08), rgba(124,58,237,0.08))', borderLeft: '2px solid rgba(212,175,106,0.4)' }}
+                >
+                  <p className="font-cormorant text-gold/80 italic text-base leading-relaxed">
+                    {review.highlight}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
