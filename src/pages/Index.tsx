@@ -15,13 +15,31 @@ const TG_REGISTER = 'https://t.me/voroshilinaella';
 const reviews = [
   {
     author: 'Татьяна',
-    text: 'Я пришла на Портал с запросом на изменение всех сфер своей жизни. До практикума у меня были серьёзные проблемы в сфере финансов, постоянные эмоциональные качели, ощущение пустоты и замкнутого круга. Понимание, что ты больше не сможешь жить по прошлому сценарию — реальность поменялась, я изменилась, прежней меня больше нет.',
-    highlight: 'Таких мощных энергий, ощущений я не испытывала ранее. Каждый день особенный и не похож на предыдущий.',
+    source: 'Переслано от Татьяна',
+    screenshot: 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/7fa77c97-b8ba-4b6c-884f-3ca64c64f353.png',
+    text: 'Я пришла на Портал с запросом на изменение всех сфер своей жизни. Главный запрос — духовный рост, раскрытие истинного предназначения, своего потенциала. До практикума были серьёзные проблемы в сфере финансов, постоянные эмоциональные качели, ощущение пустоты и замкнутого круга. Я не видела куда двигаться дальше. Портал открыл во мне способности ясно чувствовать, мыслить, получать информацию от Высших Сил Света. Доход начал стабилизироваться, внутреннее состояние изменилось — замкнутый круг исчез. Портал — это семья. Уникальные практики, в процессе которых происходит энерготерапия. Замечательные Духовные наставники, Проводники к Богу.',
+    highlight: 'Понимание, что ты больше не сможешь жить по прошлому сценарию — реальность поменялась, я изменилась, прежней меня больше Нет.',
+  },
+  {
+    author: 'Ольга Синельникова',
+    source: 'Переслано от Ольга Синельникова',
+    screenshot: 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/62948b65-ac24-40c7-b480-419298939e4a.png',
+    text: 'Элла, Максим, Лена, я благодарю вас за ПОРТАЛ, и благодарю всех за созвучие и сопричастность. Я соединилась со своей силой, с внутренним спокойствием и уверенностью, меня наполняет большая благодарность и любовь к вам и всему вокруг. Стали понятны многие ситуации, которые были в жизни, и появился уверенный вектор движения вперёд. Приходят новые идеи и хочется их реализовывать.',
+    highlight: 'Я искренне благодарю вас за Ваш огромный труд. Пусть к вам приходят многие и многие люди. Бесконечно люблю, то что происходит сейчас 🤍🤍🤍',
+  },
+  {
+    author: 'Татьяна',
+    source: 'Переслано от Татьяна',
+    screenshot: 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/05262258-4e09-4aa8-965f-28f4fb90a84c.png',
+    text: 'Элла, благодарю Вас за индивидуальную работу со мной 🙏💕 Вы мне подсветили вектор направления для трансформации моей Души! Наконец-то я поняла, что конкретно делала не так, почему ходила по кругу. Ухожу от хаоса в осознание своих последовательных действий. Чувствую как энергия простраивается внутри, как меняется пространство вокруг, потому что меняюсь я. Ваш курс — бриллиант! Та информация, которой Вы с нами делитесь, бесценна!',
+    highlight: 'Я Вам с Еленой очень благодарна за возможность находиться рядом с вами, в ваших энергетических полях! Благодарю 🙏 Благодарю 🙏 Благодарю 🙏',
   },
   {
     author: 'Наталья А.',
-    text: 'Очень хочу поделиться своими чувствами после практики с Эллой. Элла — ты такая мягкая, чуткая, невероятно приятно было с тобой работать. Уходила с практики с улыбкой и отличным настроением, мне хотелось петь и танцевать.',
-    highlight: 'Было ощущение, что мы знакомы сто лет. Это было волшебно ✨',
+    source: 'Переслано от Наталья А',
+    screenshot: 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/68d38f89-933a-47f3-b9f3-fd5bf3e3de2a.png',
+    text: 'Элла — ты такая мягкая, чуткая, невероятно приятно было с тобой работать. Энергетика близка мне и мне было очень комфортно. Элла своими словами, вопросами мягко меня направила в нужное русло. Вдруг я резко ощутила что именно здесь и сейчас для меня важно озвучить и очень важно убрать. Во время работы моё тело вибрировали будто и горело огнём, но чувствовала я себя превосходно! Уходила с практики с улыбкой и отличным настроением, мне хотелось петь и танцевать.',
+    highlight: 'Было ощущение, что мы знакомы сто лет. Это было волшебно ✨🌟',
   },
 ];
 
@@ -598,34 +616,51 @@ export default function Index() {
             {reviews.map((review, i) => (
               <div
                 key={i}
-                className="card-mystic rounded-2xl p-8 flex flex-col"
+                className="card-mystic rounded-2xl flex flex-col overflow-hidden"
                 style={{ border: '1px solid rgba(212,175,106,0.15)' }}
               >
-                <div className="flex items-center gap-3 mb-5">
+                {/* Скриншот из Telegram */}
+                <div className="relative overflow-hidden" style={{ maxHeight: '220px' }}>
+                  <img
+                    src={review.screenshot}
+                    alt={`Отзыв ${review.author}`}
+                    className="w-full object-cover object-top"
+                    style={{ opacity: 0.85 }}
+                  />
                   <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ background: 'linear-gradient(135deg, rgba(212,175,106,0.3), rgba(124,58,237,0.3))', border: '1px solid rgba(212,175,106,0.3)' }}
-                  >
-                    <span className="font-cormorant text-gold text-lg">{review.author[0]}</span>
-                  </div>
-                  <div>
-                    <p className="font-montserrat text-gold text-sm font-semibold">{review.author}</p>
-                    <p className="font-montserrat text-white/30 text-xs">Участник практикума</p>
-                  </div>
-                  <div className="ml-auto text-gold/40 text-3xl font-cormorant leading-none">"</div>
+                    className="absolute bottom-0 left-0 right-0 h-16"
+                    style={{ background: 'linear-gradient(to bottom, transparent, rgba(13,6,32,0.95))' }}
+                  />
                 </div>
 
-                <p className="font-montserrat text-white/60 text-sm leading-relaxed mb-4 flex-1">
-                  {review.text}
-                </p>
+                {/* Контент карточки */}
+                <div className="p-7 flex flex-col flex-1">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div
+                      className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ background: 'linear-gradient(135deg, rgba(212,175,106,0.3), rgba(124,58,237,0.3))', border: '1px solid rgba(212,175,106,0.3)' }}
+                    >
+                      <span className="font-cormorant text-gold text-lg">{review.author[0]}</span>
+                    </div>
+                    <div>
+                      <p className="font-montserrat text-gold text-sm font-semibold">{review.author}</p>
+                      <p className="font-montserrat text-white/30 text-xs">{review.source}</p>
+                    </div>
+                    <div className="ml-auto text-gold/40 text-3xl font-cormorant leading-none">"</div>
+                  </div>
 
-                <div
-                  className="rounded-xl p-4 mt-auto"
-                  style={{ background: 'linear-gradient(135deg, rgba(212,175,106,0.08), rgba(124,58,237,0.08))', borderLeft: '2px solid rgba(212,175,106,0.4)' }}
-                >
-                  <p className="font-cormorant text-gold/80 italic text-base leading-relaxed">
-                    {review.highlight}
+                  <p className="font-montserrat text-white/60 text-sm leading-relaxed mb-4 flex-1">
+                    {review.text}
                   </p>
+
+                  <div
+                    className="rounded-xl p-4 mt-auto"
+                    style={{ background: 'linear-gradient(135deg, rgba(212,175,106,0.08), rgba(124,58,237,0.08))', borderLeft: '2px solid rgba(212,175,106,0.4)' }}
+                  >
+                    <p className="font-cormorant text-gold/80 italic text-base leading-relaxed">
+                      {review.highlight}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
