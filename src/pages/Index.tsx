@@ -4,8 +4,8 @@ import Icon from '@/components/ui/icon';
 const PORTAL_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/d7c4a660-af38-4203-af90-3f31537fe7f5.jpg';
 // Реальные фото экспертов
 const ELLA_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/21b7d71f-423e-436d-aa1f-342b0ab4b499.png';
-const ELENA_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/20e007c1-11b9-4500-92f9-09c3bac1257c.png';
-const MAXIM_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/a4dfc592-f4e7-4f90-b864-4c668e3622d9.jpg';
+const ELENA_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/16695ff1-7692-45ba-811b-3f832ebe30ad.jpg';
+const MAXIM_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/bucket/a9b9fa98-df09-49b0-a57b-e7a3a38ee707.png';
 
 const TG_ELLA = 'https://t.me/voroshilinaella';
 const TG_ELENA = 'https://t.me/Elena_proresurs';
@@ -250,7 +250,7 @@ export default function Index() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-4 mt-10 text-white/30 font-montserrat text-xs">
-            <span className="flex items-center gap-1.5"><Icon name="Calendar" size={13} /> Старт: 1 июня 2025</span>
+            <span className="flex items-center gap-1.5"><Icon name="Calendar" size={13} /> Старт: 1 июня 2026</span>
             <span className="text-gold/20">•</span>
             <span className="flex items-center gap-1.5"><Icon name="Users" size={13} /> Мест ограничено</span>
             <span className="text-gold/20">•</span>
@@ -401,16 +401,18 @@ export default function Index() {
           {/* Равные по высоте рамки */}
           <div className="grid md:grid-cols-2 gap-8 items-stretch">
             <div className="flex flex-col gap-6">
-              <div className="card-mystic rounded-2xl p-8 flex-1 flex flex-col">
-                <h3 className="font-cormorant text-2xl text-gold mb-4">Формат</h3>
-                <p className="font-montserrat text-white/70 text-sm leading-relaxed mb-5">
-                  Глубокий трансформационный онлайн-практикум с сопровождением.
-                </p>
-                <div className="grid grid-cols-2 gap-3 flex-1">
+              <div className="card-mystic rounded-2xl p-8 flex flex-col gap-5">
+                <div>
+                  <h3 className="font-cormorant text-2xl text-gold mb-2">Формат</h3>
+                  <p className="font-montserrat text-white/70 text-sm leading-relaxed">
+                    Глубокий трансформационный онлайн-практикум с сопровождением.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
                   {['Живые эфиры', 'Практики', 'Энерговибрационные сеансы', 'Разборы состояний', 'Сопровождение', 'Доступ к записям'].map((item, i) => (
                     <div key={i} className="flex items-center gap-2">
                       <div className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
-                      <span className="font-montserrat text-white/60 text-sm">{item}</span>
+                      <span className="font-montserrat text-white/80 text-sm">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -665,7 +667,7 @@ export default function Index() {
             </h2>
             <div className="flex items-center justify-center gap-2 mt-4 text-white/30 font-montserrat text-sm">
               <Icon name="Calendar" size={14} />
-              <span>Старт: 1 июня 2025</span>
+              <span>Старт: 1 июня 2026</span>
             </div>
           </div>
 
