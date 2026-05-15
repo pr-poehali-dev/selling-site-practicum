@@ -150,7 +150,7 @@ export default function Index() {
     {
       name: 'Максим Менц',
       role: 'Финансовый стратег перехода',
-      description: 'Помогает экспертам и предпринимателям, которые выросли, но упёрлись в потолок дохода. Выявляет конфликт идентичности и помогает выстроить правила управления деньгами.',
+      description: 'Энергопрактик, помогает экспертам и предпринимателям, которые выросли, но упёрлись в потолок дохода. Выявляет конфликт идентичности и помогает выстроить правила управления деньгами.',
       img: MAXIM_IMG,
       tg: TG_MAXIM,
     },
@@ -619,21 +619,6 @@ export default function Index() {
                 className="card-mystic rounded-2xl flex flex-col overflow-hidden"
                 style={{ border: '1px solid rgba(212,175,106,0.15)' }}
               >
-                {/* Скриншот из Telegram */}
-                <div className="relative overflow-hidden" style={{ maxHeight: '220px' }}>
-                  <img
-                    src={review.screenshot}
-                    alt={`Отзыв ${review.author}`}
-                    className="w-full object-cover object-top"
-                    style={{ opacity: 0.85 }}
-                  />
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-16"
-                    style={{ background: 'linear-gradient(to bottom, transparent, rgba(13,6,32,0.95))' }}
-                  />
-                </div>
-
-                {/* Контент карточки */}
                 <div className="p-7 flex flex-col flex-1">
                   <div className="flex items-center gap-3 mb-5">
                     <div
