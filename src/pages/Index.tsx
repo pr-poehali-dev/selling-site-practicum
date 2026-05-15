@@ -1,8 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Icon from '@/components/ui/icon';
 
 const PORTAL_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/d7c4a660-af38-4203-af90-3f31537fe7f5.jpg';
 const ELLA_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/a21088e1-b2b7-4555-85d2-016202ccd613.jpg';
+const ELENA_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/01139200-82ed-4d0e-9441-74cf8d72e1bf.jpg';
+const MAXIM_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/d3bec280-b096-48f3-a025-fe5d76d97a6e.jpg';
+
+const TG_ELLA = 'https://t.me/voroshilinaella';
+const TG_ELENA = 'https://t.me/Elena_proresurs';
+const TG_MAXIM = 'https://t.me/Alladium';
+const TG_REGISTER = 'https://t.me/voroshilinaella';
 
 function Particles() {
   const particles = Array.from({ length: 20 }, (_, i) => ({
@@ -32,104 +39,6 @@ function Particles() {
   );
 }
 
-function RegistrationModal({ isOpen, onClose, selectedPlan }: { isOpen: boolean; onClose: () => void; selectedPlan: string }) {
-  const [form, setForm] = useState({ name: '', phone: '', email: '', plan: selectedPlan });
-  const [submitted, setSubmitted] = useState(false);
-
-  useEffect(() => {
-    setForm(f => ({ ...f, plan: selectedPlan }));
-  }, [selectedPlan]);
-
-  if (!isOpen) return null;
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative card-mystic rounded-2xl p-8 w-full max-w-md border border-gold/30 glow-purple" style={{ animation: 'fade-in 0.3s ease-out forwards' }}>
-        <button onClick={onClose} className="absolute top-4 right-4 text-white/50 hover:text-gold transition-colors">
-          <Icon name="X" size={20} />
-        </button>
-
-        {!submitted ? (
-          <>
-            <div className="text-center mb-6">
-              <div className="text-2xl mb-1">🔮</div>
-              <h3 className="font-cormorant text-2xl gradient-gold font-semibold">Запись на практикум</h3>
-              <p className="text-white/50 text-sm mt-1 font-montserrat">Формат: <span className="text-gold">{form.plan}</span></p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="text-xs text-white/50 uppercase tracking-widest font-montserrat">Ваше имя</label>
-                <input
-                  required
-                  value={form.name}
-                  onChange={e => setForm({ ...form, name: e.target.value })}
-                  className="w-full mt-1 bg-white/5 border border-gold/20 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-gold/50 transition-colors font-montserrat text-sm"
-                  placeholder="Как вас зовут?"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-white/50 uppercase tracking-widest font-montserrat">Телефон</label>
-                <input
-                  required
-                  value={form.phone}
-                  onChange={e => setForm({ ...form, phone: e.target.value })}
-                  className="w-full mt-1 bg-white/5 border border-gold/20 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-gold/50 transition-colors font-montserrat text-sm"
-                  placeholder="+7 (___) ___-__-__"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-white/50 uppercase tracking-widest font-montserrat">Email</label>
-                <input
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={e => setForm({ ...form, email: e.target.value })}
-                  className="w-full mt-1 bg-white/5 border border-gold/20 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-gold/50 transition-colors font-montserrat text-sm"
-                  placeholder="your@email.com"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-white/50 uppercase tracking-widest font-montserrat mb-1 block">Формат участия</label>
-                <select
-                  value={form.plan}
-                  onChange={e => setForm({ ...form, plan: e.target.value })}
-                  className="w-full bg-white/5 border border-gold/20 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold/50 transition-colors font-montserrat text-sm"
-                >
-                  <option value="STANDARD" style={{ background: '#1A0A2E' }}>STANDARD — 35 000 ₽</option>
-                  <option value="PREMIUM" style={{ background: '#1A0A2E' }}>PREMIUM — 60 000 ₽</option>
-                  <option value="VIP" style={{ background: '#1A0A2E' }}>VIP — 120 000 ₽</option>
-                </select>
-              </div>
-              <button type="submit" className="btn-gold w-full py-4 rounded-xl text-sm uppercase tracking-widest font-montserrat font-bold mt-2">
-                Подтвердить запись
-              </button>
-            </form>
-          </>
-        ) : (
-          <div className="text-center py-8">
-            <div className="text-5xl mb-4 animate-float">✨</div>
-            <h3 className="font-cormorant text-3xl gradient-gold font-semibold mb-3">Вы записаны!</h3>
-            <p className="text-white/70 font-montserrat text-sm leading-relaxed">
-              Мы свяжемся с вами в ближайшее время.<br />
-              Добро пожаловать в ПОРТАЛ 3.
-            </p>
-            <button onClick={onClose} className="btn-outline-gold mt-6 px-8 py-3 rounded-xl text-sm uppercase tracking-widest font-montserrat">
-              Закрыть
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
 function Section({ children, className = '', id = '' }: { children: React.ReactNode; className?: string; id?: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -152,14 +61,6 @@ function Section({ children, className = '', id = '' }: { children: React.ReactN
 }
 
 export default function Index() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState('STANDARD');
-
-  const openModal = (plan = 'STANDARD') => {
-    setSelectedPlan(plan);
-    setModalOpen(true);
-  };
-
   const modules = [
     {
       num: '01',
@@ -171,7 +72,7 @@ export default function Index() {
         'Где находится ваш внутренний потолок',
         'Какие страхи и внутренние решения удерживают старую реальность',
       ],
-      result: 'После первого модуля вы будете по-другому смотреть на свою жизнь и видеть скрытые закономерности. Уйдёт ощущение хаоса — появится понимание.',
+      result: 'После первого модуля вы начнёте по-другому смотреть на свою жизнь и видеть скрытые закономерности. Уйдёт ощущение хаоса — появится понимание.',
     },
     {
       num: '02',
@@ -195,7 +96,7 @@ export default function Index() {
         'Ощущение внутренней опоры',
         'Состояние, из которого начинаются совершенно другие решения',
       ],
-      result: 'После третьего модуля появляется новое состояние, становится легче проявляться и действовать. Жизнь начинает восприниматься совершенно иначе.',
+      result: 'После третьего модуля появляется новое состояние — становится легче проявляться и действовать. Жизнь начинает восприниматься совершенно иначе.',
     },
   ];
 
@@ -203,23 +104,23 @@ export default function Index() {
     {
       name: 'Элла Ворошилина',
       role: 'Энергопрактик, проводник трансформационных процессов',
-      description: 'Автор пространства «ПОРТАЛ». Работает с внутренними сценариями, энергетическими состояниями, кармическими узлами и переходами на новый уровень жизни.',
+      description: 'Автор пространства «ПОРТАЛ». Работает с внутренними сценариями, энергетическими состояниями, кармическими узлами и переходами на новый уровень жизни и реализации.',
       img: ELLA_IMG,
-      tg: false,
+      tg: TG_ELLA,
     },
     {
       name: 'Елена Манькивская',
-      role: 'Мастер-учитель Рей Ки До Сатори, целитель, регрессолог',
-      description: 'Помогает очистить энергосистему, повысить уровень жизненного ресурса при помощи медитативных практик и регресса.',
-      img: null,
-      tg: true,
+      role: 'Мастер-учитель Рэй Ки До Сатори, целитель, регрессолог',
+      description: 'Помогает очистить энергосистему и повысить уровень жизненного ресурса с помощью медитативных практик и регресса. Работает с глубинным очищением и родовыми программами.',
+      img: ELENA_IMG,
+      tg: TG_ELENA,
     },
     {
       name: 'Максим Менц',
       role: 'Финансовый стратег перехода',
-      description: 'Помогает экспертам и предпринимателям, которые выросли, но упёрлись в потолок дохода. Выявляет конфликт идентичности.',
-      img: null,
-      tg: true,
+      description: 'Помогает экспертам и предпринимателям, которые выросли, но упёрлись в потолок дохода. Выявляет конфликт идентичности и помогает выстроить правила управления деньгами.',
+      img: MAXIM_IMG,
+      tg: TG_MAXIM,
     },
   ];
 
@@ -237,7 +138,7 @@ export default function Index() {
       price: '60 000',
       icon: '💫',
       desc: 'Расширенный формат',
-      features: ['Всё из STANDARD', 'Дополнительные разборы', 'Ответы на вопросы', '1 индивидуальная сессия эксперта на выбор'],
+      features: ['Всё из формата STANDARD', 'Дополнительные разборы', 'Ответы на вопросы', '1 индивидуальная сессия эксперта на выбор'],
       highlight: true,
     },
     {
@@ -245,7 +146,7 @@ export default function Index() {
       price: '120 000',
       icon: '🔮',
       desc: 'Глубокая индивидуальная работа',
-      features: ['Всё из PREMIUM', 'Личные диагностические встречи', 'Индивидуальные разборы', 'Персональное сопровождение всех 3 экспертов'],
+      features: ['Всё из формата PREMIUM', 'Личные диагностические встречи', 'Индивидуальные разборы', 'Персональное сопровождение всех трёх экспертов'],
       highlight: false,
     },
   ];
@@ -266,7 +167,7 @@ export default function Index() {
         </div>
 
         <div className="absolute right-0 top-0 w-1/2 h-full opacity-15 pointer-events-none hidden lg:block">
-          <img src={PORTAL_IMG} alt="Portal" className="w-full h-full object-cover"
+          <img src={PORTAL_IMG} alt="Портал" className="w-full h-full object-cover"
             style={{ maskImage: 'radial-gradient(ellipse at right, black 30%, transparent 80%)' }} />
         </div>
 
@@ -301,9 +202,15 @@ export default function Index() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button onClick={() => openModal('STANDARD')} className="btn-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat animate-glow-pulse">
+            <a
+              href={TG_REGISTER}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat animate-glow-pulse inline-flex items-center gap-2"
+            >
+              <Icon name="Send" size={16} />
               Хочу участвовать
-            </button>
+            </a>
             <a href="#about" className="btn-outline-gold px-8 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat">
               Узнать подробнее
             </a>
@@ -339,7 +246,7 @@ export default function Index() {
               'Отношения, деньги или внутреннее состояние движутся по кругу',
               'Внутри есть ощущение, что вы способны на большее',
               'Вы устали от постоянного напряжения и внутренней тяжести',
-              'Много работали над собой, но глубоких изменений не произошло',
+              'Много работали над собой, но глубоких изменений так и не произошло',
               'Чувствуете потерю энергии и ощущение «живу не свою жизнь»',
               'Не можете отпустить прошлое или старые эмоциональные истории',
               'Хотите понять, что именно удерживает вас на прежнем уровне',
@@ -355,15 +262,21 @@ export default function Index() {
 
           <div className="mt-12 card-mystic rounded-2xl p-8 border-gold/20 text-center">
             <p className="font-cormorant text-2xl md:text-3xl text-white/80 italic leading-relaxed">
-              "Очень часто человек уже многое знает. Но знание не меняет жизнь,
-              <br /><span className="text-gold">если внутренний сценарий продолжает управлять решениями."</span>
+              «Очень часто человек уже многое знает. Но знание не меняет жизнь,
+              <br /><span className="text-gold">если внутренний сценарий продолжает управлять решениями.»</span>
             </p>
           </div>
 
           <div className="text-center mt-10">
-            <button onClick={() => openModal('STANDARD')} className="btn-outline-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat">
+            <a
+              href={TG_REGISTER}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat inline-flex items-center gap-2"
+            >
+              <Icon name="Send" size={14} />
               Узнать подробнее
-            </button>
+            </a>
           </div>
         </div>
       </Section>
@@ -382,16 +295,37 @@ export default function Index() {
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             {[
-              { icon: '🌟', title: 'Понимание', items: ['Почему ситуации повторялись годами', 'Какие программы влияли на решения', 'Где происходила потеря энергии', 'Почему не получалось выйти на новый уровень'] },
-              { icon: '✨', title: 'Ощущение', items: ['Больше внутренней лёгкости', 'Спокойствие вместо напряжения', 'Ощущение внутренней опоры', 'Больше энергии и ясности'] },
-              { icon: '🔮', title: 'Изменения', items: ['Прошлое перестало так сильно влиять', 'Легче принимать решения', 'Ощущение движения вперёд', 'Жизнь начала складываться иначе'] },
+              {
+                icon: '🌟', title: 'Понимание', items: [
+                  'Почему ситуации повторялись годами',
+                  'Какие программы влияли на решения',
+                  'Где происходила потеря энергии',
+                  'Почему не получалось выйти на новый уровень',
+                ]
+              },
+              {
+                icon: '✨', title: 'Ощущение', items: [
+                  'Больше внутренней лёгкости',
+                  'Спокойствие вместо постоянного напряжения',
+                  'Ощущение внутренней опоры',
+                  'Больше энергии и ясности',
+                ]
+              },
+              {
+                icon: '🔮', title: 'Изменения', items: [
+                  'Прошлое перестало так сильно влиять',
+                  'Легче принимать решения',
+                  'Ощущение движения вперёд',
+                  'Жизнь начала складываться иначе',
+                ]
+              },
             ].map((col, i) => (
               <div key={i} className="card-mystic rounded-2xl p-6 text-center">
                 <div className="text-4xl mb-4">{col.icon}</div>
                 <h3 className="font-cormorant text-2xl gradient-gold mb-4">{col.title}</h3>
                 <ul className="space-y-2">
                   {col.items.map((item, j) => (
-                    <li key={j} className="font-montserrat text-white/60 text-sm flex items-start gap-2">
+                    <li key={j} className="font-montserrat text-white/60 text-sm flex items-start gap-2 text-left">
                       <span className="text-gold mt-0.5 flex-shrink-0">—</span>
                       <span>{item}</span>
                     </li>
@@ -406,9 +340,15 @@ export default function Index() {
               И самое важное: вы перестанете жить{' '}
               <span className="gradient-gold">автоматически.</span>
             </p>
-            <button onClick={() => openModal('STANDARD')} className="btn-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat mt-8 inline-block">
+            <a
+              href={TG_REGISTER}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat mt-8 inline-flex items-center gap-2"
+            >
+              <Icon name="Send" size={14} />
               Хочу выйти на новый уровень
-            </button>
+            </a>
           </div>
         </div>
       </Section>
@@ -444,7 +384,7 @@ export default function Index() {
 
               <div className="card-mystic rounded-2xl p-8">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center flex-shrink-0">
                     <Icon name="Calendar" size={20} className="text-gold" />
                   </div>
                   <div>
@@ -463,7 +403,7 @@ export default function Index() {
                 <div className="text-5xl animate-float">🌀</div>
               </div>
               <p className="font-cormorant text-xl text-white/80 italic text-center leading-relaxed mb-6">
-                "Это не самостоятельное обучение, где человек остаётся один на один с информацией."
+                «Это не самостоятельное обучение, где человек остаётся один на один с информацией.»
               </p>
               <p className="font-montserrat text-white/60 text-sm leading-relaxed text-center">
                 ПОРТАЛ 3 — это пространство совместной глубокой работы, где участники проходят внутренний переход вместе с авторами и полем практикума.
@@ -477,9 +417,15 @@ export default function Index() {
           </div>
 
           <div className="text-center mt-10">
-            <button onClick={() => openModal('STANDARD')} className="btn-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat">
+            <a
+              href={TG_REGISTER}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat inline-flex items-center gap-2"
+            >
+              <Icon name="Send" size={14} />
               Записаться
-            </button>
+            </a>
           </div>
         </div>
       </Section>
@@ -500,7 +446,7 @@ export default function Index() {
             {modules.map((mod, i) => (
               <div key={i} className="card-mystic rounded-2xl p-8 border-gold/20 hover:border-gold/40 transition-all duration-300 group">
                 <div className="flex flex-col md:flex-row gap-6">
-                  <div className="md:w-16 flex-shrink-0">
+                  <div className="flex-shrink-0">
                     <div className="w-14 h-14 rounded-full border border-gold/30 flex items-center justify-center group-hover:border-gold/60 transition-colors">
                       <span className="font-cormorant text-2xl gradient-gold">{mod.num}</span>
                     </div>
@@ -515,10 +461,10 @@ export default function Index() {
                         </li>
                       ))}
                     </ul>
-                    <div className="bg-white/5 rounded-xl p-4" style={{ borderLeft: '2px solid rgba(212,175,106,0.4)' }}>
+                    <div className="bg-white/5 rounded-xl p-4 mb-4" style={{ borderLeft: '2px solid rgba(212,175,106,0.4)' }}>
                       <p className="text-xs font-montserrat text-gold/60 uppercase tracking-widest">Практика: {mod.practice}</p>
                     </div>
-                    <div className="mt-4 rounded-xl p-4" style={{ background: 'linear-gradient(to right, rgba(45,16,85,0.3), transparent)' }}>
+                    <div className="rounded-xl p-4" style={{ background: 'linear-gradient(to right, rgba(45,16,85,0.3), transparent)' }}>
                       <p className="text-xs font-montserrat text-gold/60 uppercase tracking-widest mb-2">✨ Результат модуля</p>
                       <p className="font-montserrat text-white/60 text-sm leading-relaxed">{mod.result}</p>
                     </div>
@@ -527,17 +473,26 @@ export default function Index() {
               </div>
             ))}
 
-            <div className="card-mystic rounded-2xl p-8 glow-gold" style={{ border: '1px solid rgba(212,175,106,0.3)' }}>
+            {/* Bonus module */}
+            <div className="card-mystic rounded-2xl p-8" style={{ border: '1px solid rgba(212,175,106,0.3)', boxShadow: '0 0 30px rgba(212,175,106,0.15)' }}>
               <div className="flex items-start gap-4 mb-4">
-                <span className="text-3xl">✨</span>
+                <span className="text-3xl flex-shrink-0">✨</span>
                 <div>
                   <p className="text-xs font-montserrat text-gold/60 uppercase tracking-widest mb-1">Дополнительный модуль</p>
                   <h3 className="font-cormorant text-2xl text-gold">Энергия, проявление и деньги</h3>
                 </div>
               </div>
-              <p className="font-montserrat text-white/60 text-sm mb-4">Особенно важен для: экспертов, помогающих практиков, коучей, психологов, энерготерапевтов</p>
+              <p className="font-montserrat text-white/60 text-sm mb-4 leading-relaxed">
+                Особенно важен для: экспертов, помогающих практиков, коучей, психологов, энерготерапевтов
+              </p>
               <div className="grid md:grid-cols-2 gap-2">
-                {['Страх больших денег', 'Внутренний потолок дохода', 'Страх проявления', 'Синдром спасателя', 'Переход из состояния выживания в состояние проводника'].map((item, i) => (
+                {[
+                  'Страх больших денег',
+                  'Внутренний потолок дохода',
+                  'Страх проявления',
+                  'Синдром спасателя',
+                  'Переход из состояния выживания в состояние проводника',
+                ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0" />
                     <span className="font-montserrat text-white/60 text-sm">{item}</span>
@@ -548,9 +503,15 @@ export default function Index() {
           </div>
 
           <div className="text-center mt-10">
-            <button onClick={() => openModal('STANDARD')} className="btn-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat">
+            <a
+              href={TG_REGISTER}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold px-10 py-4 rounded-full text-sm uppercase tracking-widest font-montserrat inline-flex items-center gap-2"
+            >
+              <Icon name="Send" size={14} />
               Хочу участвовать
-            </button>
+            </a>
           </div>
         </div>
       </Section>
@@ -569,25 +530,36 @@ export default function Index() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {experts.map((expert, i) => (
-              <div key={i} className={`card-mystic rounded-2xl p-6 text-center hover:border-gold/40 transition-all duration-300 ${i === 0 ? 'border-gold/30' : ''}`}>
-                <div className="w-24 h-24 rounded-full mx-auto mb-4 overflow-hidden" style={{ border: '2px solid rgba(212,175,106,0.2)' }}>
-                  {expert.img ? (
-                    <img src={expert.img} alt={expert.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #2D1055, #4A1A7A)' }}>
-                      <span className="font-cormorant text-3xl text-gold">{expert.name[0]}</span>
-                    </div>
-                  )}
+              <div
+                key={i}
+                className="card-mystic rounded-2xl p-6 flex flex-col items-center text-center hover:border-gold/40 transition-all duration-300"
+                style={i === 0 ? { border: '1px solid rgba(212,175,106,0.3)' } : {}}
+              >
+                {/* Avatar circle */}
+                <div
+                  className="w-28 h-28 rounded-full mb-5 overflow-hidden flex-shrink-0"
+                  style={{ border: '2px solid rgba(212,175,106,0.4)', boxShadow: '0 0 20px rgba(212,175,106,0.15)' }}
+                >
+                  <img
+                    src={expert.img}
+                    alt={expert.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
+
                 <h3 className="font-cormorant text-xl text-gold mb-1">{expert.name}</h3>
                 <p className="font-montserrat text-white/40 text-xs mb-3 leading-relaxed">{expert.role}</p>
-                <p className="font-montserrat text-white/60 text-sm leading-relaxed">{expert.description}</p>
-                {expert.tg && (
-                  <button className="btn-outline-gold mt-4 px-6 py-2 rounded-full text-xs uppercase tracking-widest font-montserrat flex items-center gap-2 mx-auto">
-                    <Icon name="Send" size={12} />
-                    Написать в Telegram
-                  </button>
-                )}
+                <p className="font-montserrat text-white/60 text-sm leading-relaxed flex-1">{expert.description}</p>
+
+                <a
+                  href={expert.tg}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline-gold mt-5 px-6 py-2.5 rounded-full text-xs uppercase tracking-widest font-montserrat inline-flex items-center gap-2"
+                >
+                  <Icon name="Send" size={12} />
+                  Написать в Telegram
+                </a>
               </div>
             ))}
           </div>
@@ -614,17 +586,18 @@ export default function Index() {
             {plans.map((plan, i) => (
               <div
                 key={i}
-                className="rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-2 cursor-pointer"
+                className="rounded-2xl p-8 flex flex-col transition-all duration-300 hover:-translate-y-2"
                 style={plan.highlight
                   ? { background: 'linear-gradient(to bottom, rgba(45,16,85,0.8), rgba(74,26,122,0.6))', border: '1px solid rgba(212,175,106,0.5)', boxShadow: '0 0 30px rgba(212,175,106,0.3), 0 0 60px rgba(212,175,106,0.1)' }
                   : { background: 'linear-gradient(135deg, rgba(45,16,85,0.6), rgba(26,10,46,0.8))', border: '1px solid rgba(212,175,106,0.2)', backdropFilter: 'blur(10px)' }
                 }
-                onClick={() => openModal(plan.name)}
               >
                 {plan.highlight && (
                   <div className="text-center mb-4">
-                    <span className="text-xs font-montserrat tracking-widest uppercase px-4 py-1 rounded-full font-bold"
-                      style={{ background: 'linear-gradient(135deg, #D4AF6A, #C9943A)', color: '#080614' }}>
+                    <span
+                      className="text-xs font-montserrat tracking-widest uppercase px-4 py-1 rounded-full font-bold"
+                      style={{ background: 'linear-gradient(135deg, #D4AF6A, #C9943A)', color: '#080614' }}
+                    >
                       Популярный
                     </span>
                   </div>
@@ -647,12 +620,15 @@ export default function Index() {
                   ))}
                 </ul>
 
-                <button
-                  onClick={(e) => { e.stopPropagation(); openModal(plan.name); }}
-                  className={plan.highlight ? 'btn-gold w-full py-4 rounded-xl text-sm uppercase tracking-widest font-montserrat' : 'btn-outline-gold w-full py-4 rounded-xl text-sm uppercase tracking-widest font-montserrat'}
+                <a
+                  href={TG_REGISTER}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${plan.highlight ? 'btn-gold' : 'btn-outline-gold'} w-full py-4 rounded-xl text-sm uppercase tracking-widest font-montserrat text-center inline-flex items-center justify-center gap-2`}
                 >
+                  <Icon name="Send" size={14} />
                   Записаться
-                </button>
+                </a>
               </div>
             ))}
           </div>
@@ -670,8 +646,10 @@ export default function Index() {
         <div className="container mx-auto max-w-3xl text-center">
           <div className="relative">
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-96 h-96 rounded-full opacity-10 animate-pulse-slow"
-                style={{ background: 'radial-gradient(circle, rgba(212,175,106,0.8) 0%, transparent 70%)' }} />
+              <div
+                className="w-96 h-96 rounded-full opacity-10 animate-pulse-slow"
+                style={{ background: 'radial-gradient(circle, rgba(212,175,106,0.8) 0%, transparent 70%)' }}
+              />
             </div>
 
             <div className="relative z-10">
@@ -685,7 +663,7 @@ export default function Index() {
 
               <div className="card-mystic rounded-2xl p-8 mb-10 text-left">
                 <p className="font-montserrat text-white/70 text-sm leading-relaxed">
-                  Очень многие люди годами чувствуют: что могут жить иначе, но не понимают, что именно удерживает их внутри старого сценария.
+                  Очень многие люди годами чувствуют, что могут жить иначе, но не понимают, что именно удерживает их внутри старого сценария.
                 </p>
                 <p className="font-cormorant text-xl text-white/80 italic mt-4 leading-relaxed">
                   ПОРТАЛ 3 — это пространство, где вы начинаете видеть эти процессы, освобождаться от старых связей и формировать совершенно другое внутреннее состояние.
@@ -695,9 +673,15 @@ export default function Index() {
                 </p>
               </div>
 
-              <button onClick={() => openModal('STANDARD')} className="btn-gold px-14 py-5 rounded-full text-base uppercase tracking-widest font-montserrat animate-glow-pulse">
+              <a
+                href={TG_REGISTER}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gold px-14 py-5 rounded-full text-base uppercase tracking-widest font-montserrat animate-glow-pulse inline-flex items-center gap-3"
+              >
+                <Icon name="Send" size={18} />
                 Хочу участвовать
-              </button>
+              </a>
 
               <div className="flex flex-wrap items-center justify-center gap-4 mt-8 text-white/20 font-montserrat text-xs">
                 <span className="flex items-center gap-1.5"><Icon name="Calendar" size={12} /> Старт 1 июня 2025</span>
@@ -715,8 +699,6 @@ export default function Index() {
         <p className="font-cormorant text-2xl gradient-gold mb-2">ПОРТАЛ 3</p>
         <p className="font-montserrat text-white/30 text-xs">© 2025 Трансформационный практикум</p>
       </footer>
-
-      <RegistrationModal isOpen={modalOpen} onClose={() => setModalOpen(false)} selectedPlan={selectedPlan} />
     </div>
   );
 }
