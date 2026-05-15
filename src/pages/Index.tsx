@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Icon from '@/components/ui/icon';
 
 const PORTAL_IMG = 'https://cdn.poehali.dev/projects/4bcbebff-8203-4998-aca5-352d33c9bd63/files/d7c4a660-af38-4203-af90-3f31537fe7f5.jpg';
@@ -92,7 +92,30 @@ function Section({ children, className = '', id = '' }: { children: React.ReactN
   );
 }
 
+function useCountdown(targetDate: Date) {
+  const calc = () => {
+    const diff = targetDate.getTime() - Date.now();
+    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return {
+      days: Math.floor(diff / 86400000),
+      hours: Math.floor((diff % 86400000) / 3600000),
+      minutes: Math.floor((diff % 3600000) / 60000),
+      seconds: Math.floor((diff % 60000) / 1000),
+    };
+  };
+  const [time, setTime] = useState(calc);
+  useEffect(() => {
+    const id = setInterval(() => setTime(calc()), 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
 export default function Index() {
+  const START_DATE = new Date('2026-06-01T00:00:00');
+  const END_DATE = new Date('2026-07-01T00:00:00');
+  const countdown = useCountdown(START_DATE);
+
   const modules = [
     {
       num: '01',
@@ -262,6 +285,74 @@ export default function Index() {
           <Icon name="ChevronDown" size={24} />
         </div>
       </div>
+
+      {/* COUNTDOWN */}
+      <Section className="py-16 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <div className="card-mystic rounded-3xl p-10" style={{ border: '1px solid rgba(212,175,106,0.25)' }}>
+            <p className="text-center font-montserrat text-xs tracking-[0.3em] uppercase text-gold/50 mb-8">До начала практикума</p>
+
+            <div className="grid grid-cols-4 gap-4 mb-10">
+              {[
+                { value: countdown.days, label: 'Дней' },
+                { value: countdown.hours, label: 'Часов' },
+                { value: countdown.minutes, label: 'Минут' },
+                { value: countdown.seconds, label: 'Секунд' },
+              ].map(({ value, label }, i) => (
+                <div key={i} className="flex flex-col items-center">
+                  <div
+                    className="w-full rounded-2xl flex items-center justify-center mb-3"
+                    style={{ background: 'rgba(212,175,106,0.07)', border: '1px solid rgba(212,175,106,0.2)', aspectRatio: '1', maxWidth: '120px', margin: '0 auto 12px' }}
+                  >
+                    <span className="font-cormorant gradient-gold font-light" style={{ fontSize: 'clamp(2rem, 6vw, 3.5rem)', lineHeight: 1 }}>
+                      {String(value).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <span className="font-montserrat text-white/40 text-xs tracking-widest uppercase">{label}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pt-8" style={{ borderTop: '1px solid rgba(212,175,106,0.1)' }}>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0">
+                  <Icon name="CalendarDays" size={16} className="text-gold" />
+                </div>
+                <div>
+                  <p className="font-montserrat text-white/40 text-xs uppercase tracking-widest">Начало</p>
+                  <p className="font-cormorant text-lg text-white">1 июня 2026</p>
+                </div>
+              </div>
+
+              <div className="hidden sm:block w-px h-10 bg-gold/15" />
+
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0">
+                  <Icon name="CalendarCheck" size={16} className="text-gold" />
+                </div>
+                <div>
+                  <p className="font-montserrat text-white/40 text-xs uppercase tracking-widest">Окончание</p>
+                  <p className="font-cormorant text-lg text-white">1 июля 2026</p>
+                </div>
+              </div>
+
+              <div className="hidden sm:block w-px h-10 bg-gold/15" />
+
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-full bg-gold/10 border border-gold/20 flex items-center justify-center flex-shrink-0">
+                  <Icon name="Clock" size={16} className="text-gold" />
+                </div>
+                <div>
+                  <p className="font-montserrat text-white/40 text-xs uppercase tracking-widest">Продолжительность</p>
+                  <p className="font-cormorant text-lg text-white">30 дней</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <div className="section-divider mx-auto max-w-4xl" />
 
       {/* FOR WHOM */}
       <Section id="about" className="py-24 px-6">
